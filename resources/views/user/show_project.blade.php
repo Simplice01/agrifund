@@ -1,4 +1,5 @@
-@extends('layout.user',['title'=>"Mon compte"])
+{{-- @extends('layout.user',['title'=>"Mon compte"]) --}}
+@extends('layout.app')
 
 @section('content')
 <div class="container py-5">
@@ -30,6 +31,9 @@
         <div class="mt-4">
             <h4>Agronome</h4>
             <p class="text-info"><strong>{{ $project->owner->user->name ?? 'Non défini' }}</strong></p>
+            <a href="{{ route('user.show_agronome', $project->owner->user->id) }}" class="btn btn-outline-primary">
+    👤 Voir le profil du porteur
+</a>
         </div>
 
 

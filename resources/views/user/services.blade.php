@@ -1,4 +1,4 @@
-@php
+{{-- @php
     $user = auth()->user();
     $rolesWithUserLayout = ['admin', 'investor', 'project_owners'];
 
@@ -6,8 +6,10 @@
         ? 'layout.user'
         : 'layout.app';
 @endphp
+@extends($layout) --}}
 
-@extends($layout)
+@extends('layout.app')
+
 
 @section('title', 'Mon compte')
 

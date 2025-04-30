@@ -31,7 +31,10 @@ Route::get('/', function () {
 
 Route::get('/campaigns', [UserController::class, 'campaigns'])->name('campaigns');
 Route::get('/services', [UserController::class, 'services'])->name('user.services');
-
+Route::get('/campaigns/{id}', [UserController::class, 'showCampaign'])->name('user.show_campaign');
+Route::get('/services/{id}', [UserController::class, 'showService'])->name('user.show_service');
+Route::get('/projects/{id}', [UserController::class, 'showProject'])->name('user.show_project');
+Route::get('/agronome/{id}', [UserController::class, 'showAgronome'])->name('user.show_agronome');
 
 // Routes pour les utilisateurs non connectés
 Route::middleware('guest')->group(function () {
@@ -45,9 +48,6 @@ Route::middleware('guest')->group(function () {
 // Routes pour les utilisateurs connectés
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('user.dashboard'); // Utilise une autre route
-    Route::get('/campaigns/{id}', [UserController::class, 'showCampaign'])->name('user.show_campaign');
-    Route::get('/services/{id}', [UserController::class, 'showService'])->name('user.show_service');
-    Route::get('/projects/{id}', [UserController::class, 'showProject'])->name('user.show_project');
     Route::post('/contribute', [UserController::class, 'store'])->name('contribute.store');
     
     Route::get('/notifications', [UserController::class, 'index'])->name('notifications.index');
@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/notifications/{id}', [UserController::class, 'destroy'])->name('notifications.destroy');
     Route::get('/user/transactions', [UserController::class, 'showTransactions'])->name('user.transactions');
     Route::post('/user/transactions', [UserController::class, 'storeTransaction'])->name('user.transactions.store');
-
+    Route::get('/contribution/{id}', [UserController::class, 'showForm'])->name('contribute.form');
 
 });
 

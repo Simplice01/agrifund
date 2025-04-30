@@ -70,4 +70,25 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+@if(session('success'))
+        Swal.fire({
+            icon: 'success',
+            title: 'Succès!',
+            text: '{{ session('success') }}',
+            showConfirmButton: true,
+            timer: 3000
+        });
+    @elseif(session('error'))
+        Swal.fire({
+            icon: 'error',
+            title: 'Erreur!',
+            text: '{{ session('error') }}',
+            showConfirmButton: true,
+            timer: 3000
+        });
+@endif
+</script>
 @endsection

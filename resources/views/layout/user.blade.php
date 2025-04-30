@@ -31,17 +31,25 @@
 					@include('user\partials\_footer')
 					<div class="pmo-lv pmo-dark active">
                        
-															@if(auth()->user()->role === 'admin' )
-															<a class="pmo-wrap" target="_blank" href="">
-																<div class="pmo-text text-white">
-															  Attention !,vous etes en mode admin et vos opérations sont irrevestibles <strong></strong> 
-																<em class="ni ni-arrow-long-right"></em>
-															</div>
-												    	</a>
-																@endif
-															@if(auth()->user()->role === 'investor' )
-
-															@endif
+						@if(auth()->check())
+						@if(auth()->user()->role === 'admin')
+								<a class="pmo-wrap" target="_blank" href="">
+										<div class="pmo-text text-white">
+												⚠ Attention ! Vous êtes en mode administrateur, et vos opérations sont irréversibles.
+												<em class="ni ni-arrow-long-right"></em>
+										</div>
+								</a>
+						@elseif(auth()->user()->role === 'investor')
+								<div class="alert alert-info">
+										Bonjour investisseur, vous pouvez soutenir une cagnotte ou consulter vos contributions.
+								</div>
+						@endif
+				@else
+						<div class="alert alert-warning">
+								Veuillez <a href="{{ route('login') }}" class="text-decoration-underline text-dark fw-bold">vous connecter</a> pour accéder à cette fonctionnalité.
+						</div>
+				@endif
+				
 															
 															
 

@@ -102,6 +102,14 @@ class UserController extends Controller
 
     
 
+    public function showForm($id)
+    {
+        $campaign = Cagnotte::findOrFail($id);
+        $agronome = $campaign->project->agronome ?? null;
+    
+        return view('user.contribute', compact('campaign', 'agronome'));
+    }
+    
 
     // UserController.php
     public function show($id)
@@ -360,6 +368,13 @@ public function store(Request $request)
 
         return response()->json(['success' => false, 'message' => 'Notification non trouvée.'], 404);
     }
+
+        public function showAgronome($id)
+    {
+        $agronome = ProjectOwner::with('user')->findOrFail($id);
+        return view('user.show_agronome', compact('agronome'));
+    }
+
 
 
     public function showTransactions()
