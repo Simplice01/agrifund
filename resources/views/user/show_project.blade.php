@@ -12,28 +12,40 @@
             <p class="lead">{{ $project->description }}</p>
         </div>
 
-        <div class="mt-4">
-            <h4>Informations financières</h4>
-            <p><strong>Montant cible :</strong> {{ number_format($project->target_amount, 0, ',', ' ') }} FCFA</p>
-            <p><strong>Montant collecté :</strong> {{ number_format($project->collected_amount, 0, ',', ' ') }} FCFA</p>
+        <div class=" mt-4">
+            <div style="padding: 10px;" class="row text-center mt-4">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <div class="p-3 border rounded bg-light shadow-sm">
+                        <h6 class="text-muted"><i class="bi bi-bullseye text-primary me-1"></i> Montant cible</h6>
+                        <h4 class="text-primary fw-bold">{{ number_format($project->goal_amount, 0, ',', ' ') }} FCFA</h4>
+                    </div>
+                </div>
+                <div style="padding: 10px;" class="col-md-6">
+                    <div class="p-3 border rounded bg-light shadow-sm">
+                        <h6 class="text-muted"><i class="bi bi-cash-stack text-success me-1"></i> Montant collecté</h6>
+                        <h4 class="text-success fw-bold">{{ number_format($project->current_amount, 0, ',', ' ') }} FCFA</h4>
+                    </div>
+                </div>
+            </div>
+            
+
 
             <div class="progress">
                 <div class="progress-bar bg-success" role="progressbar" 
-                    style="width: {{ ($project->collected_amount / max($project->target_amount, 1)) * 100 }}%;" 
-                    aria-valuenow="{{ $project->collected_amount }}" 
+                    style="width: {{ ($project->current_amount / max($project->goal_amount, 1)) * 100 }}%;" 
+                    aria-valuenow="{{ $project->current_amount }}" 
                     aria-valuemin="0" 
                     aria-valuemax="{{ $project->target_amount }}">
-                    {{ round(($project->collected_amount / max($project->target_amount, 1)) * 100, 2) }}%
+                    {{ round(($project->current_amount / max($project->goal_amount, 1)) * 100, 2) }}%
                 </div>
             </div>
         </div>
 
         <div class="mt-4">
-            <h4>Agronome</h4>
-            <p class="text-info"><strong>{{ $project->owner->user->name ?? 'Non défini' }}</strong></p>
-            <a href="{{ route('user.show_agronome', $project->owner->user->id) }}" class="btn btn-outline-primary">
-    👤 Voir le profil du porteur
-</a>
+            <h4>Publié par: <a style="font-weight:bold;" href="{{ route('user.show_agronome', $project->owner->user->id) }}" >
+                {{ $project->owner->user->name ?? 'Non défini' }}
+          </a></h4>
+            
         </div>
 
 
@@ -64,4 +76,7 @@
         </div>
     </div>
 </div>
+@endsection
+@section('styles')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 @endsection

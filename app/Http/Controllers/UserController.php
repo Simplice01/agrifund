@@ -369,11 +369,15 @@ public function store(Request $request)
         return response()->json(['success' => false, 'message' => 'Notification non trouvée.'], 404);
     }
 
-        public function showAgronome($id)
-    {
-        $agronome = ProjectOwner::with('user')->findOrFail($id);
-        return view('user.show_agronome', compact('agronome'));
-    }
+    public function showAgronome($id) 
+{
+    $agronome = ProjectOwner::with(['user', 'projects'])
+        ->where('user_id', $id)
+        ->firstOrFail();
+
+    return view('user.show_agronome', compact('agronome'));
+}
+
 
 
 

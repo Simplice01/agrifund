@@ -7,7 +7,7 @@
         <div class="row g-0">
             <!-- Image -->
             <div class="col-md-5">
-                <img src="{{ asset('storage/' . $campaign->thumbnail) }}" class="img-fluid rounded-start w-100 h-50" style="object-fit: cover; padding: 15px;" alt="{{ $campaign->title }}">
+                <img src="{{ asset('storage/' . $campaign->thumbnail) }}" class="img-fluid rounded-start w-100 h-100" style="object-fit: cover; padding: 15px;" alt="{{ $campaign->title }}">
             </div>
 
             <!-- Contenu -->
@@ -38,10 +38,10 @@
                         <span class="text-primary fw-bold">{{ optional($campaign->project->user)->name ?? 'Inconnu' }}</span>
                     </div> --}}
 
-                    <div class="d-flex gap-4">
-                        <a href="{{ route('user.show_project', $campaign->project_id) }}" class="btn btn-lg btn-outline-dark">📌 Voir le Projet</a>
+                    <div class="d-flex gap-3">
+                        <a href="{{ route('user.show_project', $campaign->project_id) }}" class="btn  btn-outline-dark">📌 Voir le Projet</a>
                         <span style="padding: 10px;"></span>
-                        <a href="{{ route('contribute.form', ['id' => $campaign->id]) }}" class="btn btn-lg btn-primary">💰 Contribuer</a>
+                        <a href="{{ route('contribute.form', ['id' => $campaign->id]) }}" class="btn  btn-primary">💰 Contribuer</a>
                     </div>
                 </div>
             </div>
